@@ -11,4 +11,6 @@ public:
 	void clear();
 
 	bool shouldClose() const;
+
+	
 };

@@ -1,4 +1,7 @@
 #include "render.h"
+#include <iostream>
+#include <fstream>
+
 
 geometry makeGeometry(vertex * verts, size_t vertCount,
 						unsigned * indices, size_t indexCount)
@@ -94,3 +97,32 @@ void draw(const shader & shad, const geometry & geo)
 	// draw
 	glDrawElements(GL_TRIANGLES, geo.size, GL_UNSIGNED_INT, 0);
 }
+
+// Error callback called by OpenGL whenever a problem occurs (vendor-dependent)
+void GLAPIENTRY errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
+	GLsizei length, const GLchar *message,
+	const void *userParam)
+{
+	std::cerr << message << std::endl;
+}
+
+std::string loadVertShad(std::string filepath)
+{
+	std::string fileContents;
+	std::string line;
+	std::ifstream file;
+	file.open(filepath, std::ios::in);
+	if (file.is_open())
+	{
+		while ( std::getline(file, line) )
+		{
+			std::cout << line << '\n';
+			fileContents = fileContents + line;
+		}
+		file.close();
+	}
+	else std::cout << "Unable to open file";
+
+	return fileContents.c_str();
+}
+

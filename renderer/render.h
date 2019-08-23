@@ -2,6 +2,7 @@
 
 #include "glew/GL/glew.h"
 #include "glm/glm.hpp"
+#include <string>
 
 struct vertex
 {
@@ -29,3 +30,8 @@ shader makeShader(const char * vertSource,
 void freeShader(shader &shad);
 
 void draw(const shader &shad, const geometry &geo);
+
+void GLAPIENTRY errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
+	GLsizei length, const GLchar *message, const void *userParam);
+
+std::string loadVertShad(std::string filepath);
