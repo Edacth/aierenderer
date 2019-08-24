@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "renderer", "renderer\renderer.vcxproj", "{4EE42AAC-194E-4950-83AF-D1C9B53B8F30}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{752D6EDF-2285-4E22-AD63-5D33F7A6447A}"
+	ProjectSection(SolutionItems) = preProject
+		shaderfiles\basicFrag.txt = shaderfiles\basicFrag.txt
+		shaderfiles\basicVert.txt = shaderfiles\basicVert.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

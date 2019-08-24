@@ -7,6 +7,29 @@
 struct vertex
 {
 	glm::vec4 pos;
+	glm::vec4 color;
+	glm::vec2 uv;
+};
+
+struct mesh
+{
+	int vertCount;
+	int indexCount;
+	vertex* verts;
+	unsigned int* indices;
+
+	mesh(vertex* _verts, int vertCount, unsigned int* _indices, int indexCount)
+	{
+		for (size_t i = 0; i < vertCount; i++)
+		{
+			verts[i] = _verts[i];
+		}
+		for (size_t i = 0; i < indexCount; i++)
+		{
+			indices[i] = _indices[i];
+		}
+		
+	}
 };
 
 struct geometry
@@ -20,6 +43,12 @@ struct shader
 	GLuint program;
 };
 
+struct texture
+{
+	GLuint handle;
+	unsigned int width, height, channels;
+};
+
 geometry makeGeometry(vertex * verts, size_t vertCount,
 						unsigned * indicies, size_t indexCount);
 
@@ -31,7 +60,17 @@ void freeShader(shader &shad);
 
 void draw(const shader &shad, const geometry &geo);
 
+void setUniform(const shader &shad, GLuint location, const glm::mat4 & value);
+
+void setUniform(const shader &shad, GLuint location, const texture &value, int textureSlot);
+
+texture makeUniform(const shader &shad, GLuint location, const glm::mat4 & value);
+
+void freeTexture(texture &tex);
+
+texture loadTexture(const char *imagePath);
+
+GLDEBUGPROC errorDisplay();
+
 void GLAPIENTRY errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
 	GLsizei length, const GLchar *message, const void *userParam);
-
-std::string loadVertShad(std::string filepath);
