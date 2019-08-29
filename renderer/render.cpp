@@ -34,7 +34,7 @@ geometry makeGeometry(vertex * verts, size_t vertCount,
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)16);
 	glEnableVertexAttribArray(2);
 	// TODO: FIGURE OUT THE VOID POINTER SIZE OF ADDITION. ADD VERTSIES AND COLOR
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)sizeof(vertex));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)32);
 
 	// unbind buffers (in a SPECIFIC order)
 	glBindVertexArray(0);
@@ -69,10 +69,10 @@ shader makeShader(const char * vertSource,
 	glShaderSource(vert, 1, &vertSource, 0);
 	glShaderSource(frag, 1, &fragSource, 0);
 	glCompileShader(vert);
-	glDebugMessageCallback(errorDisplay(), (void*)0);
+	//glDebugMessageCallback(errorDisplay(), (void*)0);
 	// TODO: See docs.gl on how to do error checking for your shader
 	glCompileShader(frag);
-	glDebugMessageCallback(errorDisplay(), (void*)0);
+	//glDebugMessageCallback(errorDisplay(), (void*)0);
 	// TODO: See docs.gl on how to do error checking for your shader
 
 	// attach the shaders
@@ -194,25 +194,4 @@ texture loadTexture(const char *imagePath)
 	stbi_image_free(rawPixelData);
 
 	return tex;
-}
-
-GLDEBUGPROC errorDisplay()
-{
-	GLenum err;
-	while ((err = glGetError()) != GL_NO_ERROR)
-	{
-		std::cout << err << std::endl;
-	}
-	return GLDEBUGPROC();
-}
-
-// Error callback called by OpenGL whenever a problem occurs (vendor-dependent)
-void GLAPIENTRY errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
-	GLsizei length, const GLchar *message,
-	const void *userParam)
-{
-	//std::cerr << message << std::endl;
-
-	std::cout << "ID: " << id << std::endl;
-	std::cout << "Message: " << message << std::endl;
 }

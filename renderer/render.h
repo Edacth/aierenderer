@@ -69,8 +69,3 @@ texture makeUniform(const shader &shad, GLuint location, const glm::mat4 & value
 void freeTexture(texture &tex);
 
 texture loadTexture(const char *imagePath);
-
-GLDEBUGPROC errorDisplay();
-
-void GLAPIENTRY errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
-	GLsizei length, const GLchar *message, const void *userParam);
