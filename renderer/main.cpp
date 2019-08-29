@@ -4,8 +4,8 @@
 
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
+#define TINYOBJLOADER_IMPLEMENTATION
 #include "tinyobjloader/tiny_obj_loader.h"
-
 #include <string>
 #include <iostream>
 #include <vector>
@@ -19,7 +19,7 @@ int main()
 	game.init(640, 480, "Source3");
 
 	std::string meshFilePath = "C:/Users/s189062/source/repos/aierenderer/meshes/cube.obj";
-	//std::vector<tinyobj::shape_t> meshes = fileLoadMesh(meshFilePath);
+	std::vector<tinyobj::shape_t> meshes = fileLoadMesh(meshFilePath);
 
 	// Triangle, CCW
 	vertex triVerts[] =
