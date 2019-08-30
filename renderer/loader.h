@@ -4,4 +4,4 @@
 
 std::string fileLoadShader(std::string filepath);
 
-std::vector<tinyobj::shape_t> fileLoadMesh(std::string filepath);
+std::vector<tinyobj::shape_t> fileLoadMesh(std::string filepath, tinyobj::attrib_t &attrib);

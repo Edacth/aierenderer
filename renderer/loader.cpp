@@ -1,10 +1,12 @@
+#include "loader.h"
+#include "render.h"
+
 #include <string>
 #include <fstream>
 #include <iostream>
 // TODO: Figure out why the define thing causes problems when it is here. It is fine in main.cpp
-#include "loader.h"
-
-
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "tinyobjloader/tiny_obj_loader.h"
 
 std::string fileLoadShader(std::string filepath)
 {
@@ -27,18 +29,18 @@ std::string fileLoadShader(std::string filepath)
 	return fileContents.c_str();
 }
 
-std::vector<tinyobj::shape_t> fileLoadMesh(std::string filepath)
+std::vector<tinyobj::shape_t> fileLoadMesh(std::string filepath, tinyobj::attrib_t &attrib)
 {
-	tinyobj::attrib_t attrib;
 	std::vector<tinyobj::shape_t> shapes;
 	std::vector<tinyobj::material_t> materials;
-
+	
 	std::string warn;
 	std::string err;
+	geometry geo;
 
 	//bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filepath.c_str());
 	const char* idk = { };
-	bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filepath.c_str(), idk, true);
+	bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filepath.c_str(), idk, false);
 
 	if (!err.empty()) {
 		std::cerr << err << std::endl;
@@ -58,6 +60,7 @@ std::vector<tinyobj::shape_t> fileLoadMesh(std::string filepath)
 			// Loop over vertices in the face.
 			for (size_t v = 0; v < fv; v++) {
 				// access to vertex
+
 				tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
 				tinyobj::real_t vx = attrib.vertices[3 * idx.vertex_index + 0];
 				tinyobj::real_t vy = attrib.vertices[3 * idx.vertex_index + 1];

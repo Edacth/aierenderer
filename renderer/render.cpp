@@ -28,13 +28,14 @@ geometry makeGeometry(vertex * verts, size_t vertCount,
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned), indices, GL_STATIC_DRAW);
 
 	// describe vertex data
-	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(0); // position
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)0);
-	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(1); // color
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)16);
-	glEnableVertexAttribArray(2);
-	// TODO: FIGURE OUT THE VOID POINTER SIZE OF ADDITION. ADD VERTSIES AND COLOR
+	glEnableVertexAttribArray(2); // UVs
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)32);
+	glEnableVertexAttribArray(3); // normals
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)40);
 
 	// unbind buffers (in a SPECIFIC order)
 	glBindVertexArray(0);
@@ -106,6 +107,11 @@ void draw(const shader & shad, const geometry & geo)
 	glBindVertexArray(geo.vao);
 	// draw
 	glDrawElements(GL_TRIANGLES, geo.size, GL_UNSIGNED_INT, 0);
+}
+
+void setUniform(const shader &shad, GLuint location, const glm::vec3 & value)
+{
+	glProgramUniform3fv(shad.program, location, 1, glm::value_ptr(value));
 }
 
 void setUniform(const shader & shad, GLuint location, const glm::mat4 & value)
