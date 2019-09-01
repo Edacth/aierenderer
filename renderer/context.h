@@ -11,6 +11,7 @@ public:
 	void clear();
 
 	bool shouldClose() const;
+	GLFWwindow* getWindow() { return window; };
 
 	
 };

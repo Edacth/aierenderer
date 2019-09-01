@@ -2,6 +2,8 @@
 
 layout (location = 3) uniform sampler2D albedo;
 layout (location = 4) uniform vec3 lightDir;
+//I cannot get lightColor to work :(
+layout (location = 5) uniform vec4 lightColor;
 
 in vec2 vUV;
 in vec3 vNormal;
@@ -14,5 +16,5 @@ void main()
     vec4 diffuse = d * vec4(1, 1, 1, 1);
     vec4 base = texture(albedo, vUV);
 
-    vertColor = diffuse * base;
+    vertColor = vec4((diffuse * base).xyz, 1.0f); 
 }
