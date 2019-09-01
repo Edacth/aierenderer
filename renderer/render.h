@@ -53,6 +53,7 @@ struct texture
 struct light
 {
 	glm::vec3 direction;
+	glm::vec4 color;
 };
 
 geometry makeGeometry(vertex * verts, size_t vertCount,

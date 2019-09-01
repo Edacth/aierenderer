@@ -136,14 +136,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="context.cpp" />
-    <ClCompile Include="loader.cpp" />
+    <ClCompile Include="fileLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\thirdparty\stb\stb_image.h" />
     <ClInclude Include="context.h" />
-    <ClInclude Include="loader.h" />
+    <ClInclude Include="fileLoader.h" />
     <ClInclude Include="render.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
